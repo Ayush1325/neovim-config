@@ -139,6 +139,14 @@ require("formatter").setup({
 				}
 			end,
 		},
+		qml = {
+			function()
+				return {
+					exe = "qmlfmt",
+					stdin = true,
+				}
+			end,
+		},
 	},
 })
 
@@ -147,7 +155,7 @@ api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua,*.cpp,*.h,CMakeLists.txt,*.toml FormatWrite
+  autocmd BufWritePost *.js,*.rs,*.lua,*.cpp,*.h,CMakeLists.txt,*.toml,*.qml FormatWrite
 augroup END
 ]],
 	true
