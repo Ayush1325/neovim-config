@@ -22,7 +22,7 @@ call GuiClipboard()
 
 " Enable GUI Tabline
 if exists(':GuiTabline')
-    GuiTabline 1
+    GuiTabline 0
 endif
 
 " Enable GUI Popupmenu

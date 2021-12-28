@@ -18,8 +18,7 @@ local wk = require("which-key")
 wk.register({
 	f = {
 		name = "Files",
-		f = { "<cmd>lua require('telescope.builtin').git_files()<cr>", "Find Files" },
-		a = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "Find All Files" },
+		f = { "<cmd>lua require('telescope.builtin').file_browser()<cr>", "Files Browser" },
 		p = { ":Telescope projects<CR>", "Projects" },
 		g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Live Grep" },
 	},
@@ -39,9 +38,14 @@ wk.register({
 		name = "LSP",
 		i = { "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", "LSP Implementations" },
 		d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", "LSP Definations" },
-		f = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "LSP Finder" },
-		c = { "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Code Action" },
+		c = { "<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>", "Code Action" },
 		r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "LSP Rename" },
+		l = {
+			name = "List",
+			r = { "<cmd>lua require('telescope.builtin').lsp_references()<CR>", "LSP References" },
+			s = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", "LSP Document Symbols" },
+			w = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", "LSP Workspace Symbols" },
+		},
 	},
 
 	n = {
@@ -72,6 +76,14 @@ wk.register({
 	g = {
 		name = "Git",
 		t = { "<cmd>lua require('neogit').open()<CR>", "Open Neogit" },
+		f = { "<cmd>lua require('telescope.builtin').git_files()<cr>", "Find Git Files" },
+		b = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "List Branches" },
+		s = { "<cmd>lua require('telescope.builtin').git_status()<cr>", "List Status" },
+		c = {
+			name = "Commits",
+			c = { "<cmd>lua require('telescope.builtin').git_commits()<cr>", "List Git commits" },
+			b = { "<cmd>lua require('telescope.builtin').git_bcommits()<cr>", "List Buffere's commits" },
+		},
 	},
 
 	c = {
@@ -86,6 +98,10 @@ wk.register({
 		v = { "<cmd>lua require('telescope').extensions.dap.variables{}<cr>", "Variables" },
 		f = { "<cmd>lua require('telescope').extensions.dap.frames{}<cr>", "Frames" },
 		c = { "<cmd>lua require'telescope'.extensions.dap.commands{}<cr>", "Commands" },
+	},
+	s = {
+		name = "Source",
+		n = { ":source $MYVIMRC<CR>", "Source Neovim Config" },
 	},
 }, {
 	prefix = "<leader>",

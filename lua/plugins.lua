@@ -2,14 +2,14 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use({ "glepnir/dashboard-nvim" })
 	use("neovim/nvim-lspconfig")
-	use({
-		"williamboman/nvim-lsp-installer",
-	})
+	--	use({
+	--		"williamboman/nvim-lsp-installer",
+	--	})
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
-	use("glepnir/lspsaga.nvim")
+	-- use("glepnir/lspsaga.nvim")
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
@@ -33,7 +33,7 @@ return require("packer").startup(function(use)
 	})
 	use("mfussenegger/nvim-dap")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("Pocco81/DAPInstall.nvim")
+	-- use("Pocco81/DAPInstall.nvim")
 	use({ "nvim-telescope/telescope-dap.nvim", requires = "mfussenegger/nvim-dap" })
 	use({
 		"lewis6991/spellsitter.nvim",
