@@ -14,11 +14,8 @@ require("telescope").setup({
 -- load_extension, somewhere after setup function:
 require("telescope").load_extension("fzf")
 
--- Nvim Project Integration
-require("telescope").load_extension("projects")
-
 -- Clipboard
 require("neoclip").setup({})
 
--- DAP Integration
-require("telescope").load_extension("dap")
+-- File Browser
+require("telescope").load_extension("file_browser")

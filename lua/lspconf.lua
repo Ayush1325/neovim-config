@@ -69,6 +69,9 @@ require("dapui").setup({
 	windows = { indent = 1 },
 })
 
+-- Telescope Integration
+require("telescope").load_extension("dap")
+
 -- Load all installed debuggers
 -- local dap_install = require("dap-install")
 

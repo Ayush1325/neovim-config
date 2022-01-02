@@ -27,5 +27,5 @@ endif
 
 " Enable GUI Popupmenu
 if exists(':GuiPopupmenu')
-    GuiPopupmenu ``
+    GuiPopupmenu 1
 endif

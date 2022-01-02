@@ -18,7 +18,7 @@ local wk = require("which-key")
 wk.register({
 	f = {
 		name = "Files",
-		f = { "<cmd>lua require('telescope.builtin').file_browser()<cr>", "Files Browser" },
+		f = { "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>", "Files Browser" },
 		p = { ":Telescope projects<CR>", "Projects" },
 		g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Live Grep" },
 	},

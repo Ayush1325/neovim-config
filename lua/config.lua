@@ -60,8 +60,9 @@ require("bufferline").setup({
 	},
 })
 
--- Configure Feline
-require("feline").setup()
+-- Configure Statusline
+-- require("feline").setup()
+require("lualine").setup()
 
 -- Configure Indent Backlines
 opt.list = true
@@ -77,6 +78,7 @@ require("nvim-tree").setup({})
 
 -- Configure Nvim Project
 require("project_nvim").setup({})
+require("telescope").load_extension("projects")
 
 -- Configure Focus
 require("focus").setup()

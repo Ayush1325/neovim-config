@@ -2,18 +2,15 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use({ "glepnir/dashboard-nvim" })
 	use("neovim/nvim-lspconfig")
-	--	use({
-	--		"williamboman/nvim-lsp-installer",
-	--	})
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
-	-- use("glepnir/lspsaga.nvim")
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
+	use({ "nvim-telescope/telescope-file-browser.nvim" })
 	use({
 		"nvim-telescope/telescope-fzf-native.nvim",
 		run = "make",
@@ -42,11 +39,11 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
-	--	use({
-	--		"hoob3rt/lualine.nvim",
-	--		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	--	})
-	use("famiu/feline.nvim")
+	use({
+		"hoob3rt/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
+	-- use("famiu/feline.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({
 		"kyazdani42/nvim-tree.lua",
