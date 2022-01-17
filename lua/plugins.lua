@@ -1,7 +1,22 @@
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use({ "glepnir/dashboard-nvim" })
+
 	use("neovim/nvim-lspconfig")
+	use({
+		"williamboman/nvim-lsp-installer",
+	})
+	use({ "simrat39/rust-tools.nvim" })
+	use({ "nvim-lua/plenary.nvim" })
+	use({
+		"ray-x/lsp_signature.nvim",
+	})
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-buffer")
+	use("hrsh7th/cmp-path")
+	use("saadparwaiz1/cmp_luasnip")
+	use("hrsh7th/cmp-cmdline")
+
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
@@ -30,7 +45,7 @@ return require("packer").startup(function(use)
 	})
 	use("mfussenegger/nvim-dap")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	-- use("Pocco81/DAPInstall.nvim")
+	use("Pocco81/DAPInstall.nvim")
 	use({ "nvim-telescope/telescope-dap.nvim", requires = "mfussenegger/nvim-dap" })
 	use({
 		"lewis6991/spellsitter.nvim",

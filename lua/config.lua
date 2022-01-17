@@ -50,6 +50,20 @@ cmp.setup({
 	},
 })
 
+cmp.setup.cmdline("/", {
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+cmp.setup.cmdline(":", {
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
+
 -- Setup Tabs
 require("bufferline").setup({
 	options = {
@@ -149,6 +163,14 @@ require("formatter").setup({
 				}
 			end,
 		},
+		python = {
+			function()
+				return {
+					exe = "autopep8-3",
+					stdin = false,
+				}
+			end,
+		},
 	},
 })
 
@@ -157,7 +179,7 @@ api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.rs,*.lua,*.cpp,*.h,CMakeLists.txt,*.toml,*.qml FormatWrite
+  autocmd BufWritePost *.rs,*.lua,*.cpp,*.h,CMakeLists.txt,*.toml,*.qml,*.py FormatWrite
 augroup END
 ]],
 	true

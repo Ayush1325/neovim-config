@@ -1,29 +1,35 @@
 -- Useful Variables
 local cmd = vim.cmd
+local lsp = vim.lsp
 
 -- Setup LSP
--- local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer = require("nvim-lsp-installer")
+local capabilities = require("cmp_nvim_lsp").update_capabilities(lsp.protocol.make_client_capabilities())
 
--- lsp_installer.on_server_ready(function(server)
---     local opts = {}
---     server:setup(opts)
---     vim.cmd [[ do User LspAttachBuffers ]]
--- end)
+lsp_installer.on_server_ready(function(server)
+	local opts = {}
+	server:setup(opts)
+	vim.cmd([[ do User LspAttachBuffers ]])
+	capabilities = capabilities
+end)
+
+-- LSP Signature
+require("lsp_signature").setup()
 
 -- Rust Analyzer
-require("lspconfig").rust_analyzer.setup({})
+-- require("lspconfig").rust_analyzer.setup({})
 
 -- Topl
-require("lspconfig").taplo.setup({})
+-- require("lspconfig").taplo.setup({})
 
 -- Clangd
-require("lspconfig").clangd.setup({})
+-- require("lspconfig").clangd.setup({})
 
 -- Cmake
-require("lspconfig").cmake.setup({})
+-- require("lspconfig").cmake.setup({})
 
 -- Lua
-require("lspconfig").sumneko_lua.setup({})
+-- require("lspconfig").sumneko_lua.setup({})
 
 -- LSP Saga
 -- require("lspsaga").init_lsp_saga()
@@ -73,14 +79,14 @@ require("dapui").setup({
 require("telescope").load_extension("dap")
 
 -- Load all installed debuggers
--- local dap_install = require("dap-install")
+local dap_install = require("dap-install")
 
--- dap_install.setup({
--- 	installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
--- })
+dap_install.setup({
+	installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+})
 
--- local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
+local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
 
--- for _, debugger in ipairs(dbg_list) do
--- 	dap_install.config(debugger)
--- end
+for _, debugger in ipairs(dbg_list) do
+	dap_install.config(debugger)
+end
