@@ -7,10 +7,11 @@ local lsp_installer = require("nvim-lsp-installer")
 local capabilities = require("cmp_nvim_lsp").update_capabilities(lsp.protocol.make_client_capabilities())
 
 lsp_installer.on_server_ready(function(server)
-	local opts = {}
+	local opts = {
+		capabilities = capabilities,
+	}
 	server:setup(opts)
 	vim.cmd([[ do User LspAttachBuffers ]])
-	capabilities = capabilities
 end)
 
 -- LSP Signature
@@ -90,3 +91,6 @@ local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
 for _, debugger in ipairs(dbg_list) do
 	dap_install.config(debugger)
 end
+
+-- Trouble Diagnostic
+require("trouble").setup()
