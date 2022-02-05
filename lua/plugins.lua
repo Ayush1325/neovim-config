@@ -77,6 +77,7 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-telescope/telescope.nvim" } },
 	})
 	use({ "nvim-telescope/telescope-dap.nvim", requires = "mfussenegger/nvim-dap" })
+	use("nvim-telescope/telescope-ui-select.nvim")
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")

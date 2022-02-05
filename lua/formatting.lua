@@ -85,6 +85,15 @@ require("formatter").setup({
 				}
 			end,
 		},
+		html = {
+			function()
+				return {
+					exe = "prettier",
+					args = { "--stdin-filepath", vim.fn.fnameescape(api.nvim_buf_get_name(0)) },
+					stdin = true,
+				}
+			end,
+		},
 	},
 })
 
@@ -93,7 +102,7 @@ api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.rs,*.lua,*.cpp,*.h,CMakeLists.txt,*.qml,*.py,*.sh,Config.toml,*.md FormatWrite
+  autocmd BufWritePost *.rs,*.lua,*.cpp,*.h,CMakeLists.txt,*.qml,*.py,*.sh,Cargo.toml,*.md,*.html FormatWrite
 augroup END
 ]],
 	true

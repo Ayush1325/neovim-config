@@ -28,7 +28,7 @@ opt.wildmode = { "list", "longest" }
 opt.mouse = "a"
 
 -- Clipboard
-opt.clipboard = { "unnamedplus" }
+opt.clipboard = { "unnamedplus", "unnamed" }
 require("neoclip").setup({})
 
 -- Setup Tabs

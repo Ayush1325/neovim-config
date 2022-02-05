@@ -8,6 +8,9 @@ require("telescope").setup({
 			case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			-- the default case_mode is "smart_case"
 		},
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown({}),
+		},
 	},
 })
 -- To get fzf loaded and working with telescope, you need to call
@@ -16,3 +19,6 @@ require("telescope").load_extension("fzf")
 
 -- File Browser
 require("telescope").load_extension("file_browser")
+
+-- UI Select
+require("telescope").load_extension("ui-select")
