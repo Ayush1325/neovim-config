@@ -102,7 +102,7 @@ api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.rs,*.lua,*.cpp,*.h,CMakeLists.txt,*.qml,*.py,*.sh,Cargo.toml,*.md,*.html FormatWrite
+  autocmd BufWritePost *.rs,*.lua,*.cpp,*.h,*.qml,*.py,*.sh,Cargo.toml,*.md,*.html FormatWrite
 augroup END
 ]],
 	true
