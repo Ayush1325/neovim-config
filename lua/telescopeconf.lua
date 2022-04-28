@@ -22,3 +22,9 @@ require("telescope").load_extension("file_browser")
 
 -- UI Select
 require("telescope").load_extension("ui-select")
+
+-- Frequency Selector
+-- require("telescope").load_extension("frecency")
+
+-- Software License Picker
+require("telescope").load_extension("software-licenses")

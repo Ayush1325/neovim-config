@@ -36,7 +36,7 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "clang-format",
-					args = { "--assume-filename", api.nvim_buf_get_name(0) },
+					args = { "--assume-filename", vim.fn.shellescape(api.nvim_buf_get_name(0)) },
 					stdin = true,
 					cwd = vim.fn.expand("%:p:h"), -- Run clang-format in cwd of the file.
 				}

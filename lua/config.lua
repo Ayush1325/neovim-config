@@ -8,9 +8,6 @@ local api = vim.api
 g.vscode_style = "dark"
 cmd("colorscheme vscode")
 
--- Dashboard
-g.dashboard_default_executive = "telescope"
-
 -- Editor Stuff
 opt.expandtab = true
 opt.hidden = true
@@ -28,8 +25,8 @@ opt.wildmode = { "list", "longest" }
 opt.mouse = "a"
 
 -- Clipboard
-opt.clipboard = { "unnamedplus", "unnamed" }
-require("neoclip").setup({})
+opt.clipboard = "unnamedplus"
+-- require("neoclip").setup({})
 
 -- Setup Tabs
 require("bufferline").setup({

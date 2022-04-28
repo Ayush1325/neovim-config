@@ -1,6 +1,7 @@
 --Setup Treesitter
 local ts = require("nvim-treesitter.configs")
-ts.setup({ ensure_installed = "maintained", highlight = { enable = true } })
+
+ts.setup({ ensure_installed = { "bash", "c", "cmake", "cpp", "dockerfile", "fish", "html", "http", "llvm", "lua", "make", "markdown", "regex", "python", "rust", "toml", "vim", "yaml", "json" }, highlight = { enable = true, additional_vim_regex_highlighting = false } })
 
 -- Configure Raibow Parens
 require("nvim-treesitter.configs").setup({

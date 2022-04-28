@@ -24,7 +24,7 @@ require("lsp_signature").setup()
 -- require("lspconfig").taplo.setup({})
 
 -- Clangd
--- require("lspconfig").clangd.setup({})
+require("lspconfig").clangd.setup({})
 
 -- Cmake
 -- require("lspconfig").cmake.setup({})
@@ -80,17 +80,17 @@ require("dapui").setup({
 require("telescope").load_extension("dap")
 
 -- Load all installed debuggers
-local dap_install = require("dap-install")
+-- local dap_install = require("dap-install")
 
-dap_install.setup({
-	installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
-})
-
-local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
-
-for _, debugger in ipairs(dbg_list) do
-	dap_install.config(debugger)
-end
+-- dap_install.setup({
+-- 	installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+-- })
+-- 
+-- local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
+-- 
+-- for _, debugger in ipairs(dbg_list) do
+-- 	dap_install.config(debugger)
+-- end
 
 -- Trouble Diagnostic
 require("trouble").setup()

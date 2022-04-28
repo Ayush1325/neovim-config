@@ -2,7 +2,6 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- UI
-	use({ "glepnir/dashboard-nvim" })
 	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
 	use({
 		"hoob3rt/lualine.nvim",
@@ -56,12 +55,6 @@ return require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
-	use({
-		"lewis6991/spellsitter.nvim",
-		config = function()
-			require("spellsitter").setup()
-		end,
-	})
 	use("p00f/nvim-ts-rainbow")
 	use({ "romgrk/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
 
@@ -78,6 +71,7 @@ return require("packer").startup(function(use)
 	})
 	use({ "nvim-telescope/telescope-dap.nvim", requires = "mfussenegger/nvim-dap" })
 	use("nvim-telescope/telescope-ui-select.nvim")
+  use("chip/telescope-software-licenses.nvim")
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")
