@@ -28,9 +28,9 @@ return require("packer").startup(function(use)
 	})
 	use({ "simrat39/rust-tools.nvim" })
 	use({ "nvim-lua/plenary.nvim" })
-	use({
-		"ray-x/lsp_signature.nvim",
-	})
+--	use({
+--		"ray-x/lsp_signature.nvim",
+--	})
 	use("onsails/lspkind-nvim")
 	use({
 		"folke/trouble.nvim",
@@ -49,6 +49,7 @@ return require("packer").startup(function(use)
 		"hrsh7th/nvim-cmp",
 		requires = { { "hrsh7th/cmp-nvim-lsp" }, { "hrsh7th/cmp-buffer" } },
 	})
+  use("hrsh7th/cmp-nvim-lsp-signature-help")
 
 	-- Treesitter
 	use({

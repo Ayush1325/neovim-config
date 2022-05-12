@@ -65,7 +65,7 @@ wk.register({
 		name = "LSP",
 		i = { "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", "LSP Implementations" },
 		d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", "LSP Definations" },
-		c = { "<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>", "Code Action" },
+		c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "LSP Rename" },
 		l = {
 			name = "List",

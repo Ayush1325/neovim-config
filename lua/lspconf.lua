@@ -15,7 +15,7 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 -- LSP Signature
-require("lsp_signature").setup()
+-- require("lsp_signature").setup()
 
 -- Rust Analyzer
 -- require("lspconfig").rust_analyzer.setup({})
@@ -24,7 +24,9 @@ require("lsp_signature").setup()
 -- require("lspconfig").taplo.setup({})
 
 -- Clangd
-require("lspconfig").clangd.setup({})
+require("lspconfig").clangd.setup({
+  capabilities = capabilities
+})
 
 -- Cmake
 -- require("lspconfig").cmake.setup({})
