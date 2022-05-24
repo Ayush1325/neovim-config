@@ -25,10 +25,7 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "stylua",
-					args = {
-						"-",
-					},
-					stdin = true,
+					stdin = false,
 				}
 			end,
 		},
@@ -98,12 +95,10 @@ require("formatter").setup({
 })
 
 -- Format on Save
-api.nvim_exec(
-	[[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.rs,*.lua,*.cpp,*.h,*.qml,*.py,*.sh,Cargo.toml,*.md,*.html FormatWrite
-augroup END
-]],
-	true
-)
+
+local formatAutogroup = api.nvim_create_augroup("FormatAutogroup", { clear = true })
+api.nvim_create_autocmd("BufWritePost", {
+	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.py", "*.sh", "*.toml", "*.md", "*.html" },
+	command = "FormatWrite",
+	group = formatAutogroup,
+})

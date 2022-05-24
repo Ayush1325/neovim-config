@@ -28,9 +28,9 @@ return require("packer").startup(function(use)
 	})
 	use({ "simrat39/rust-tools.nvim" })
 	use({ "nvim-lua/plenary.nvim" })
---	use({
---		"ray-x/lsp_signature.nvim",
---	})
+	--	use({
+	--		"ray-x/lsp_signature.nvim",
+	--	})
 	use("onsails/lspkind-nvim")
 	use({
 		"folke/trouble.nvim",
@@ -49,7 +49,7 @@ return require("packer").startup(function(use)
 		"hrsh7th/nvim-cmp",
 		requires = { { "hrsh7th/cmp-nvim-lsp" }, { "hrsh7th/cmp-buffer" } },
 	})
-  use("hrsh7th/cmp-nvim-lsp-signature-help")
+	use("hrsh7th/cmp-nvim-lsp-signature-help")
 
 	-- Treesitter
 	use({
@@ -72,7 +72,7 @@ return require("packer").startup(function(use)
 	})
 	use({ "nvim-telescope/telescope-dap.nvim", requires = "mfussenegger/nvim-dap" })
 	use("nvim-telescope/telescope-ui-select.nvim")
-  use("chip/telescope-software-licenses.nvim")
+	use("chip/telescope-software-licenses.nvim")
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")
