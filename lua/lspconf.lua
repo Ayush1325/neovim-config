@@ -28,6 +28,9 @@ lspconfig.clangd.setup({})
 -- Lua
 lspconfig.sumneko_lua.setup({})
 
+-- Python
+require("lspconfig").pyright.setup({})
+
 -- LSP Saga
 -- require("lspsaga").init_lsp_saga()
 

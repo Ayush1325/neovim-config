@@ -68,7 +68,7 @@ require("formatter").setup({
 		python = {
 			function()
 				return {
-					exe = "autopep8-3",
+					exe = "black",
 					stdin = false,
 				}
 			end,

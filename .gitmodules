@@ -1,0 +1,3 @@
+[submodule "treesitter/tree-sitter-ini"]
+	path = treesitter/tree-sitter-ini
+	url = git@github.com:justinmk/tree-sitter-ini.git

@@ -1,7 +1,34 @@
 --Setup Treesitter
 local ts = require("nvim-treesitter.configs")
 
-ts.setup({ ensure_installed = { "bash", "c", "cmake", "cpp", "dockerfile", "fish", "html", "http", "llvm", "lua", "make", "markdown", "regex", "python", "rust", "toml", "vim", "yaml", "json" }, highlight = { enable = true, additional_vim_regex_highlighting = false } })
+ts.setup({
+	ensure_installed = {
+		"bash",
+		"c",
+		"cmake",
+		"cpp",
+		"dockerfile",
+		"fish",
+		"html",
+		"http",
+		"json",
+		"llvm",
+		"lua",
+		"make",
+		"markdown",
+		"ninja",
+		"python",
+		"regex",
+		"rust",
+		"toml",
+		"vim",
+		"yaml",
+	},
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false,
+	},
+})
 
 -- Configure Raibow Parens
 require("nvim-treesitter.configs").setup({
@@ -34,3 +61,16 @@ require("treesitter-context").setup({
 		--   },
 	},
 })
+
+-- Configure ini files
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.ini = {
+	install_info = {
+		url = "~/.config/nvim/treesitter/tree-sitter-ini", -- local path or git repo
+		files = { "src/parser.c" },
+		-- optional entries:
+		generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+		requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+	},
+	filetype = { "dec", "dsc", "inf" }, -- if filetype does not match the parser name
+}
