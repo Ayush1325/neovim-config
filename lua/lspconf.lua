@@ -5,7 +5,7 @@ local api = vim.api
 
 -- Setup LSP
 require("nvim-lsp-installer").setup({
-	automatic_installation = true,
+	automatic_installation = false,
 	max_concurrent_installers = 12,
 })
 local lspconfig = require("lspconfig")
