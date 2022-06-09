@@ -14,7 +14,33 @@ local lspconfig = require("lspconfig")
 -- require("lsp_signature").setup()
 
 -- Rust Analyzer
-lspconfig.rust_analyzer.setup({})
+lspconfig.rust_analyzer.setup({
+	server = {
+		settings = {
+			["rust-analyzer"] = {
+				assist = {
+					importEnforceGranularity = true,
+					importPrefix = "crate",
+				},
+				cargo = {
+					allFeatures = true,
+				},
+				checkOnSave = {
+					command = "clippy",
+				},
+				diagnostics = {
+					disabled = { "unlinked-file" },
+				},
+			},
+			inlayHints = {
+				lifetimeElisionHints = {
+					enable = true,
+					useParameterNames = true,
+				},
+			},
+		},
+	},
+})
 
 -- Topl
 lspconfig.taplo.setup({})
