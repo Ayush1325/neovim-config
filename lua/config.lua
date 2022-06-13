@@ -63,7 +63,7 @@ require("project_nvim").setup({})
 require("telescope").load_extension("projects")
 
 -- Configure Focus
-require("focus").setup()
+-- require("focus").setup()
 
 -- Configure Autosave
 require("autosave").setup({

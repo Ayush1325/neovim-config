@@ -18,60 +18,73 @@ local wk = require("which-key")
 wk.register({
 	b = {
 		name = "Buffers",
-		b = { "<cmd>lua require('telescope.builtin').buffers()<cr>", "List Buffers" },
+		b = { require("telescope.builtin").buffers, "List Buffers" },
 		c = { ":bd<CR>", "Close Buffer" },
 	},
 
 	c = {
 		name = "Clipboard",
-		n = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Neoclip Telescope" },
-		l = { "<cmd> lua require('telescope.builtin').registers<cr>", "List Registers" },
+		n = { require("telescope").extensions.neoclip.default, "Neoclip Telescope" },
+		l = { require("telescope.builtin").registers, "List Registers" },
 	},
 
 	d = {
 		name = "DAP",
-		b = { "<cmd>lua require('telescope').extensions.dap.list_breakpoints{}<cr>", "List Breakpoints" },
-		v = { "<cmd>lua require('telescope').extensions.dap.variables{}<cr>", "Variables" },
-		f = { "<cmd>lua require('telescope').extensions.dap.frames{}<cr>", "Frames" },
-		c = { "<cmd>lua require'telescope'.extensions.dap.commands{}<cr>", "Commands" },
+		l = {
+			name = "List",
+			b = { require("telescope").extensions.dap.list_breakpoints, "List Breakpoints" },
+			v = { require("telescope").extensions.dap.variables, "Variables" },
+			f = { require("telescope").extensions.dap.frames, "Frames" },
+			c = { require("telescope").extensions.dap.commands, "Commands" },
+		},
+		s = {
+			name = "Step Actions",
+			o = { require("dap").step_over, "Step Over" },
+			i = { require("dap").step_into, "Step Into" },
+			u = { require("dap").step_out, "Step Out" },
+			b = { require("dap").step_back, "Step Back" },
+		},
+		c = { require("dap").continue, "Continue" },
+		b = { require("dap").toggle_breakpoint, "Toggle Breakpoint" },
+		t = { require("dap").terminate, "Terminate" },
+		u = { require("dapui").toggle, "Toggle DapUI" },
 	},
 
 	f = {
 		name = "Files",
-		f = { "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>", "Files Browser" },
-		p = { ":Telescope projects<CR>", "Projects" },
-		g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Live Grep" },
+		f = { require("telescope").extensions.file_browser.file_browser, "Files Browser" },
+		g = { require("telescope.builtin").live_grep, "Live Grep" },
 	},
 
 	g = {
 		name = "Git",
-		t = { "<cmd>lua require('neogit').open()<CR>", "Open Neogit" },
-		f = { "<cmd>lua require('telescope.builtin').git_files()<cr>", "Find Git Files" },
-		b = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "List Branches" },
-		s = { "<cmd>lua require('telescope.builtin').git_status()<cr>", "List Status" },
+		t = { require("neogit").open, "Open Neogit" },
+		f = { require("telescope.builtin").git_files, "Find Git Files" },
+		b = { require("telescope.builtin").git_branches, "List Branches" },
+		s = { require("telescope.builtin").git_status, "List Status" },
 		c = {
 			name = "Commits",
-			c = { "<cmd>lua require('telescope.builtin').git_commits()<cr>", "List Git commits" },
-			b = { "<cmd>lua require('telescope.builtin').git_bcommits()<cr>", "List Buffere's commits" },
+			c = { require("telescope.builtin").git_commits, "List Git commits" },
+			b = { require("telescope.builtin").git_bcommits, "List Buffere's commits" },
 		},
 	},
 
 	h = {
 		name = "Help",
-		t = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Help Tags" },
+		t = { require("telescope.builtin").help_tags, "Help Tags" },
 	},
 
 	l = {
 		name = "LSP",
-		i = { "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", "LSP Implementations" },
-		d = { "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", "LSP Definations" },
-		c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "LSP Rename" },
+		i = { require("telescope.builtin").lsp_implementations, "LSP Implementations" },
+		d = { require("telescope.builtin").lsp_definitions, "LSP Definations" },
+		c = { vim.lsp.buf.code_action, "Code Action" },
+		r = { vim.lsp.buf.rename, "LSP Rename" },
 		l = {
 			name = "List",
-			r = { "<cmd>lua require('telescope.builtin').lsp_references()<CR>", "LSP References" },
-			s = { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", "LSP Document Symbols" },
-			w = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", "LSP Workspace Symbols" },
+			r = { require("telescope.builtin").lsp_references, "LSP References" },
+			s = { require("telescope.builtin").lsp_document_symbols, "LSP Document Symbols" },
+			w = { require("telescope.builtin").lsp_workspace_symbols, "LSP Workspace Symbols" },
 		},
 		v = { "<cmd>Vista!!<cr>", "Toggle Vista" },
 		t = {
@@ -84,10 +97,10 @@ wk.register({
 
 	m = {
 		name = "Motion",
-		w = { "<cmd>lua require('hop').hint_words()<cr>", "Hit Words" },
-		l = { "<cmd>lua require('hop').hint_lines_skip_whitespace()<cr>", "Hint Lines" },
-		c = { "<cmd>lua require('hop').hint_char1()<cr>", "Hint Char" },
-		C = { "<cmd>lua require('hop').hint_char2()<cr>", "Hint Char" },
+		w = { require("hop").hint_words, "Hit Words" },
+		l = { require("hop").hint_lines_skip_whitespace, "Hint Lines" },
+		c = { require("hop").hint_char1, "Hint Char" },
+		C = { require("hop").hint_char2, "Hint Char" },
 	},
 
 	n = {

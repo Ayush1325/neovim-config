@@ -28,9 +28,6 @@ return require("packer").startup(function(use)
 	})
 	use({ "simrat39/rust-tools.nvim" })
 	use({ "nvim-lua/plenary.nvim" })
-	--	use({
-	--		"ray-x/lsp_signature.nvim",
-	--	})
 	use("onsails/lspkind-nvim")
 	use({
 		"folke/trouble.nvim",
@@ -80,7 +77,8 @@ return require("packer").startup(function(use)
 	-- DAP Mode
 	use("mfussenegger/nvim-dap")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("Pocco81/DAPInstall.nvim")
+	use("mfussenegger/nvim-dap-python")
+	use("theHamsta/nvim-dap-virtual-text")
 
 	-- Git
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
@@ -93,7 +91,7 @@ return require("packer").startup(function(use)
 	use("peterhoeg/vim-qml")
 
 	-- Text Editing
-	use("beauwilliams/focus.nvim")
+	-- use("beauwilliams/focus.nvim")
 	use("tpope/vim-surround")
 	use("windwp/nvim-autopairs")
 

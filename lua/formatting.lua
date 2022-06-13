@@ -68,7 +68,8 @@ require("formatter").setup({
 		python = {
 			function()
 				return {
-					exe = "black",
+					exe = "autopep8",
+          args = {'--in-place'},
 					stdin = false,
 				}
 			end,
@@ -98,7 +99,7 @@ require("formatter").setup({
 
 local formatAutogroup = api.nvim_create_augroup("FormatAutogroup", { clear = true })
 api.nvim_create_autocmd("BufWritePost", {
-	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.py", "*.sh", "*.toml", "*.md", "*.html" },
+	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.toml", "*.md", "*.html", "*.py" },
 	command = "FormatWrite",
 	group = formatAutogroup,
 })
