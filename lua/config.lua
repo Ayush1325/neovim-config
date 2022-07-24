@@ -5,8 +5,16 @@ local cmd = vim.cmd
 local api = vim.api
 
 -- Theme
-g.vscode_style = "dark"
-cmd("colorscheme vscode")
+-- g.vscode_style = "dark"
+-- cmd("colorscheme vscode")
+-- vim.o.background = "dark"
+local onedarkpro = require("onedarkpro")
+
+onedarkpro.setup({
+	theme = "onedark_dark",
+})
+
+onedarkpro.load()
 
 -- Editor Stuff
 opt.expandtab = true
@@ -56,7 +64,11 @@ require("indent_blankline").setup({
 })
 
 -- Configure Tree
-require("nvim-tree").setup({})
+require("nvim-tree").setup({
+	view = {
+		adaptive_size = true,
+	},
+})
 
 -- Configure Nvim Project
 require("project_nvim").setup({})

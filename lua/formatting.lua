@@ -7,7 +7,7 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "rustfmt",
-					args = { "--emit=stdout" },
+					args = { "+nightly", "--emit=stdout" },
 					stdin = true,
 				}
 			end,
@@ -69,7 +69,7 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "autopep8",
-          args = {'--in-place'},
+					args = { "--in-place" },
 					stdin = false,
 				}
 			end,
@@ -99,7 +99,7 @@ require("formatter").setup({
 
 local formatAutogroup = api.nvim_create_augroup("FormatAutogroup", { clear = true })
 api.nvim_create_autocmd("BufWritePost", {
-	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.toml", "*.md", "*.html", "*.py" },
+	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.html", "*.py" },
 	command = "FormatWrite",
 	group = formatAutogroup,
 })

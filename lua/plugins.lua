@@ -8,6 +8,7 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 	use("Mofiqul/vscode.nvim")
+	use("olimorris/onedarkpro.nvim")
 	use("kyazdani42/nvim-web-devicons")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({
@@ -34,6 +35,8 @@ return require("packer").startup(function(use)
 		requires = "kyazdani42/nvim-web-devicons",
 	})
 	use("liuchengxu/vista.vim")
+	use("tamago324/nlsp-settings.nvim")
+	use("rcarriga/nvim-notify")
 
 	-- Nvim CMP Completion
 	use("hrsh7th/cmp-nvim-lsp")

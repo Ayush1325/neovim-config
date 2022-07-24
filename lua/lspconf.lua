@@ -25,6 +25,7 @@ lspconfig.rust_analyzer.setup({
 			},
 			cargo = {
 				features = "all",
+				target = "x86_64-unknown-uefi",
 			},
 			proc_macro = {
 				enable = true,
@@ -32,7 +33,7 @@ lspconfig.rust_analyzer.setup({
 			checkOnSave = {
 				allTargets = true,
 			},
-			standalone = false,
+			standalone = true,
 		},
 	},
 })
@@ -56,9 +57,25 @@ lspconfig.sumneko_lua.setup({
 })
 
 -- Python
-require("lspconfig").pyright.setup({
+lspconfig.pyright.setup({
+	capabilities = capabilities,
+})
+
+-- Json
+lspconfig.jsonls.setup({
 	capabilities = capabilities,
 })
 
 -- Trouble Diagnostic
 require("trouble").setup()
+
+-- nlsp
+local nlspsettings = require("nlspsettings")
+
+nlspsettings.setup({
+	config_home = vim.fn.stdpath("config") .. "/nlsp-settings",
+	local_settings_dir = ".nlsp-settings",
+	local_settings_root_markers = { ".git" },
+	append_default_schemas = true,
+	loader = "json",
+})
