@@ -39,6 +39,16 @@ require("formatter").setup({
 				}
 			end,
 		},
+    c = {
+			function()
+				return {
+					exe = "clang-format",
+					args = { "--assume-filename", vim.fn.shellescape(api.nvim_buf_get_name(0)) },
+					stdin = true,
+					cwd = vim.fn.expand("%:p:h"), -- Run clang-format in cwd of the file.
+				}
+			end,
+		},
 		cmake = {
 			function()
 				return {
@@ -99,7 +109,7 @@ require("formatter").setup({
 
 local formatAutogroup = api.nvim_create_augroup("FormatAutogroup", { clear = true })
 api.nvim_create_autocmd("BufWritePost", {
-	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.html", "*.py" },
+	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.html", "*.py", "*.c" },
 	command = "FormatWrite",
 	group = formatAutogroup,
 })
