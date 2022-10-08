@@ -39,7 +39,7 @@ require("formatter").setup({
 				}
 			end,
 		},
-    c = {
+		c = {
 			function()
 				return {
 					exe = "clang-format",
@@ -106,7 +106,6 @@ require("formatter").setup({
 })
 
 -- Format on Save
-
 local formatAutogroup = api.nvim_create_augroup("FormatAutogroup", { clear = true })
 api.nvim_create_autocmd("BufWritePost", {
 	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.html", "*.py", "*.c" },

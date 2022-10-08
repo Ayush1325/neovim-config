@@ -7,8 +7,7 @@ return require("packer").startup(function(use)
 		"hoob3rt/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	use("Mofiqul/vscode.nvim")
-	use("olimorris/onedarkpro.nvim")
+  use("RRethy/nvim-base16")
 	use("kyazdani42/nvim-web-devicons")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({
@@ -99,7 +98,7 @@ return require("packer").startup(function(use)
 	use("windwp/nvim-autopairs")
 
 	-- Misc
-	use("Pocco81/AutoSave.nvim")
+	use("Pocco81/auto-save.nvim")
 	use("AckslD/nvim-neoclip.lua")
 
 	-- Motion

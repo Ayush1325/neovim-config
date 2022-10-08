@@ -20,6 +20,7 @@ wk.register({
 		name = "Buffers",
 		b = { require("telescope.builtin").buffers, "List Buffers" },
 		c = { ":bd<CR>", "Close Buffer" },
+		f = { ":FormatWrite<CR>", "Format Buffer" },
 	},
 
 	c = {
