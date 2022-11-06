@@ -103,3 +103,6 @@ require("nvim-autopairs").setup({})
 
 -- Easymotion
 require("hop").setup()
+
+-- Nvim Surround
+require("nvim-surround").setup({})

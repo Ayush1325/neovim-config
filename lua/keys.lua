@@ -15,12 +15,15 @@ end
 
 -- Which Keys
 local wk = require("which-key")
+wk.setup()
 wk.register({
 	b = {
 		name = "Buffers",
 		b = { require("telescope.builtin").buffers, "List Buffers" },
-		c = { ":bd<CR>", "Close Buffer" },
-		f = { ":FormatWrite<CR>", "Format Buffer" },
+		c = { "<cmd>bd<CR>", "Close Buffer" },
+		f = { "<cmd>FormatWrite<CR>", "Format Buffer" },
+		s = { "<cmd>setlocal spell spelllang=en_us<CR>", "Enable Spellcheck" },
+		n = { "<cmd>echo expand('%:p')<CR>", "Display File Name" },
 	},
 
 	c = {
@@ -87,7 +90,7 @@ wk.register({
 			s = { require("telescope.builtin").lsp_document_symbols, "LSP Document Symbols" },
 			w = { require("telescope.builtin").lsp_workspace_symbols, "LSP Workspace Symbols" },
 		},
-		v = { "<cmd>Vista!!<cr>", "Toggle Vista" },
+		v = { "<cmd>SymbolsOutline<cr>", "Toggle Outline" },
 		t = {
 			name = "Trouble",
 			w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostic" },

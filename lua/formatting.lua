@@ -1,4 +1,25 @@
 local api = vim.api
+local util = require("formatter.util")
+
+function prettier_format()
+	return {
+		exe = "prettier",
+		args = { "--stdin-filepath", vim.fn.fnameescape(api.nvim_buf_get_name(0)) },
+		stdin = true,
+	}
+end
+
+function clang_format()
+	return {
+		exe = "clang-format",
+		args = {
+			"-assume-filename",
+			util.escape_path(util.get_current_buffer_file_name()),
+		},
+		stdin = true,
+		try_node_modules = true,
+	}
+end
 
 -- Configure Formatter
 require("formatter").setup({
@@ -7,7 +28,7 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "rustfmt",
-					args = { "+nightly", "--emit=stdout" },
+					args = { "+nightly" },
 					stdin = true,
 				}
 			end,
@@ -78,29 +99,23 @@ require("formatter").setup({
 		python = {
 			function()
 				return {
-					exe = "autopep8",
+					exe = "autopep8-3",
 					args = { "--in-place" },
 					stdin = false,
 				}
 			end,
 		},
 		markdown = {
-			function()
-				return {
-					exe = "prettier",
-					args = { "--stdin-filepath", vim.fn.fnameescape(api.nvim_buf_get_name(0)) },
-					stdin = true,
-				}
-			end,
+			prettier_format,
 		},
 		html = {
-			function()
-				return {
-					exe = "prettier",
-					args = { "--stdin-filepath", vim.fn.fnameescape(api.nvim_buf_get_name(0)) },
-					stdin = true,
-				}
-			end,
+			prettier_format,
+		},
+		css = {
+			prettier_format,
+		},
+		scss = {
+			prettier_format,
 		},
 	},
 })
@@ -108,7 +123,7 @@ require("formatter").setup({
 -- Format on Save
 local formatAutogroup = api.nvim_create_augroup("FormatAutogroup", { clear = true })
 api.nvim_create_autocmd("BufWritePost", {
-	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.html", "*.py", "*.c" },
+	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.html", "*.c", "*.py", "*.css", "*.scss", "*.cu" },
 	command = "FormatWrite",
 	group = formatAutogroup,
 })
