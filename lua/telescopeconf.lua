@@ -28,3 +28,6 @@ require("telescope").load_extension("software-licenses")
 
 -- Telescope Integration
 require("telescope").load_extension("dap")
+
+-- Projects
+require("telescope").load_extension("projects")

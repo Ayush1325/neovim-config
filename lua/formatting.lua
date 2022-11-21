@@ -1,17 +1,19 @@
 local api = vim.api
 local util = require("formatter.util")
 
-function prettier_format()
+local toolbox = "toolbox run -c formatters "
+
+local function prettier_format()
 	return {
-		exe = "prettier",
+		exe = toolbox .. "prettier",
 		args = { "--stdin-filepath", vim.fn.fnameescape(api.nvim_buf_get_name(0)) },
 		stdin = true,
 	}
 end
 
-function clang_format()
+local function clang_format()
 	return {
-		exe = "clang-format",
+		exe = toolbox .. "clang-format",
 		args = {
 			"-assume-filename",
 			util.escape_path(util.get_current_buffer_file_name()),
@@ -36,7 +38,7 @@ require("formatter").setup({
 		sh = {
 			function()
 				return {
-					exe = "shfmt",
+					exe = toolbox .. "shfmt",
 					args = { "-i", 2 },
 					stdin = true,
 				}
@@ -45,35 +47,21 @@ require("formatter").setup({
 		lua = {
 			function()
 				return {
-					exe = "stylua",
+					exe = toolbox .. "stylua",
 					stdin = false,
 				}
 			end,
 		},
 		cpp = {
-			function()
-				return {
-					exe = "clang-format",
-					args = { "--assume-filename", vim.fn.shellescape(api.nvim_buf_get_name(0)) },
-					stdin = true,
-					cwd = vim.fn.expand("%:p:h"), -- Run clang-format in cwd of the file.
-				}
-			end,
+			clang_format,
 		},
 		c = {
-			function()
-				return {
-					exe = "clang-format",
-					args = { "--assume-filename", vim.fn.shellescape(api.nvim_buf_get_name(0)) },
-					stdin = true,
-					cwd = vim.fn.expand("%:p:h"), -- Run clang-format in cwd of the file.
-				}
-			end,
+			clang_format,
 		},
 		cmake = {
 			function()
 				return {
-					exe = "cmake-format",
+					exe = toolbox .. "cmake-format",
 					args = { "-i" },
 					stdin = false,
 				}
@@ -82,24 +70,16 @@ require("formatter").setup({
 		toml = {
 			function()
 				return {
-					exe = "taplo",
+					exe = toolbox .. "taplo",
 					args = { "format" },
 					stdin = false,
-				}
-			end,
-		},
-		qml = {
-			function()
-				return {
-					exe = "qmlfmt",
-					stdin = true,
 				}
 			end,
 		},
 		python = {
 			function()
 				return {
-					exe = "autopep8-3",
+					exe = toolbox .. "autopep8-3",
 					args = { "--in-place" },
 					stdin = false,
 				}
@@ -123,7 +103,7 @@ require("formatter").setup({
 -- Format on Save
 local formatAutogroup = api.nvim_create_augroup("FormatAutogroup", { clear = true })
 api.nvim_create_autocmd("BufWritePost", {
-	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.qml", "*.sh", "*.html", "*.c", "*.py", "*.css", "*.scss", "*.cu" },
+	pattern = { "*.rs", "*.lua", "*.cpp", "*.h", "*.sh", "*.html", "*.c", "*.py", "*.css", "*.scss", "*.cu" },
 	command = "FormatWrite",
 	group = formatAutogroup,
 })

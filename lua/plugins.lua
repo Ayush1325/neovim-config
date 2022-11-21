@@ -1,3 +1,16 @@
+local ensure_packer = function()
+	local fn = vim.fn
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		vim.cmd([[packadd packer.nvim]])
+		return true
+	end
+	return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 return require("packer").startup({
 	function(use)
 		use("wbthomason/packer.nvim")
@@ -78,16 +91,36 @@ return require("packer").startup({
 		-- Git
 		use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 		use("sindrets/diffview.nvim")
-		use("lewis6991/gitsigns.nvim")
+		use({
+			"lewis6991/gitsigns.nvim",
+			config = function()
+				require("gitsigns").setup()
+			end,
+		})
 
 		-- Programming
-		use("ahmedkhalf/project.nvim")
+		use({
+			"ahmedkhalf/project.nvim",
+			config = function()
+				require("project_nvim").setup({})
+			end,
+		})
 		use("mhartington/formatter.nvim")
 		use("peterhoeg/vim-qml")
 
 		-- Text Editing
-		use("windwp/nvim-autopairs")
-		use("kylechui/nvim-surround")
+		use({
+			"windwp/nvim-autopairs",
+			config = function()
+				require("nvim-autopairs").setup()
+			end,
+		})
+		use({
+			"kylechui/nvim-surround",
+			config = function()
+				require("nvim-surround").setup({})
+			end,
+		})
 
 		-- Misc
 		use("Pocco81/auto-save.nvim")
@@ -95,7 +128,12 @@ return require("packer").startup({
 		use("jghauser/mkdir.nvim")
 
 		-- Motion
-		use("phaazon/hop.nvim")
+		use({
+			"phaazon/hop.nvim",
+			config = function()
+				require("hop").setup()
+			end,
+		})
 	end,
 	config = {
 		max_jobs = nil,

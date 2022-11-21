@@ -119,6 +119,3 @@ require("neogit").setup({
 		diffview = true,
 	},
 })
-
--- Gitsigns
-require("gitsigns").setup()

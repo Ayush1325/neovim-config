@@ -22,10 +22,16 @@ opt.tabstop = 2
 opt.termguicolors = true
 opt.wildmode = { "list", "longest" }
 opt.mouse = "a"
+opt.cursorline = true
+
+-- Configure Indent Backlines
+opt.list = true
+
+-- Persistant Undo
+opt.undofile = true
 
 -- Clipboard
 opt.clipboard = "unnamedplus"
--- require("neoclip").setup({})
 
 -- Setup Tabs
 require("bufferline").setup({
@@ -38,16 +44,11 @@ require("bufferline").setup({
 })
 
 -- Configure Statusline
--- require("feline").setup()
 require("lualine").setup({
 	options = {
 		theme = "auto",
 	},
 })
-
--- Configure Indent Backlines
-opt.list = true
--- opt.listchars:append("space:⋅")
 
 require("indent_blankline").setup({
 	-- space_char_blankline = " ",
@@ -60,13 +61,6 @@ require("nvim-tree").setup({
 		adaptive_size = true,
 	},
 })
-
--- Configure Nvim Project
-require("project_nvim").setup({})
-require("telescope").load_extension("projects")
-
--- Configure Focus
--- require("focus").setup()
 
 -- Configure Autosave
 require("auto-save").setup({
@@ -97,12 +91,3 @@ require("auto-save").setup({
 		after_saving = nil, -- ran after doing the actual save
 	},
 })
-
--- Configure Autopairs
-require("nvim-autopairs").setup({})
-
--- Easymotion
-require("hop").setup()
-
--- Nvim Surround
-require("nvim-surround").setup({})
