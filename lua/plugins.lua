@@ -106,7 +106,6 @@ return require("packer").startup({
 			end,
 		})
 		use("mhartington/formatter.nvim")
-		use("peterhoeg/vim-qml")
 
 		-- Text Editing
 		use({

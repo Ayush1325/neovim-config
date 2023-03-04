@@ -19,14 +19,17 @@ cmp.setup({
 		["<C-e>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 	}),
-  sources = cmp.config.sources({
+	-- window = {
+	-- 	documentation = cmp.config.window.bordered(),
+	-- },
+	sources = cmp.config.sources({
+		{ name = "luasnip", keyword_length = 2 },
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-    { name = 'nvim_lsp_signature_help' },
-		{ name = "nvim_lua" },
-  }, {
+		{ name = "nvim_lsp_signature_help", keyword_length = 3 },
 		{ name = "buffer" },
-  }),
+		{ name = "path" },
+		{ name = "nvim_lua" },
+	}),
 	formatting = {
 		format = lspkind.cmp_format({
 			with_text = true, -- do not show text alongside icons
@@ -42,14 +45,14 @@ cmp.setup({
 })
 
 cmp.setup.cmdline("/", {
-  mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = "buffer" },
 	},
 })
 
 cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {

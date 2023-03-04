@@ -37,27 +37,73 @@ lsp_installer.setup({
 require("trouble").setup()
 
 -- Rust Analyzer
-lspconfig.rust_analyzer.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		["rust-analyzer"] = {
-			assist = {
-				importEnforceGranularity = true,
-				importPrefix = "crate",
+-- lspconfig.rust_analyzer.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		["rust-analyzer"] = {
+-- 			assist = {
+-- 				importEnforceGranularity = true,
+-- 				importPrefix = "crate",
+-- 			},
+-- 			cargo = {
+-- 				features = "all",
+-- 			},
+-- 			proc_macro = {
+-- 				enable = true,
+-- 			},
+-- 			checkOnSave = {
+-- 				allTargets = true,
+-- 			},
+-- 			standalone = true,
+-- 			inlayHints = { locationLinks = false },
+-- 		},
+-- 	},
+-- })
+require("rust-tools").setup({
+	server = {
+		on_attach = on_attach,
+		standalone = false,
+		capabilities = capabilities,
+		settings = {
+			["rust-analyzer"] = {
+				assist = {
+					importEnforceGranularity = true,
+					importPrefix = "crate",
+				},
+				cargo = {
+					features = "all",
+				},
+				proc_macro = {
+					enable = true,
+				},
+				checkOnSave = {
+					allTargets = true,
+				},
+				-- inlayHints = { locationLinks = false },
 			},
-			cargo = {
-				features = "all",
-			},
-			proc_macro = {
-				enable = true,
-			},
-			checkOnSave = {
-				allTargets = true,
-			},
-			standalone = true,
 		},
 	},
+	tools = {
+		autoSetHints = true,
+		on_initialized = function(x)
+			if x == "ok" or x == "warning" then
+				-- set inlay hints
+				require("rust-tools.inlay_hints").set_inlay_hints()
+			end
+		end,
+		inlay_hints = {
+			auto = true,
+			only_current_line = false,
+			show_parameter_hints = true,
+			parameter_hints_prefix = "<- ",
+			other_hints_prefix = "=> ",
+			highlight = "Comment",
+		},
+	},
+	-- dap = {
+	-- 	adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+	-- },
 })
 
 -- Topl

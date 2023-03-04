@@ -32,20 +32,18 @@ require("diffview").setup({
 			height = 16,
 		},
 		log_options = {
-			single_file = {
-				max_count = 512,
-				follow = false, -- Follow renames (only for single file)
-				all = false, -- Include all refs under 'refs/' including HEAD
-				merges = false, -- List only merge commits
-				no_merges = false, -- List no merge commits
-				reverse = false, -- List commits in reverse order
-			},
-			multi_file = {
-				max_count = 128,
-				merges = false, -- List only merge commits
-				no_merges = false, -- List no merge commits
-				reverse = false, -- List commits in reverse order
-			},
+      git = {
+        single_file = {
+          diff_merges = "combined",
+        },
+        multi_file = {
+          diff_merges = "first-parent",
+        },
+      },
+      hg = {
+        single_file = {},
+        multi_file = {},
+      },
 		},
 	},
 	key_bindings = {

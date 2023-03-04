@@ -17,6 +17,7 @@ require("rust-tools").setup({
 			parameter_hints_prefix = "<- ",
 			other_hints_prefix = "=> ",
 			highlight = "Comment",
+			locationLinks = false,
 		},
 	},
 	dap = {
