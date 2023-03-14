@@ -32,18 +32,18 @@ require("diffview").setup({
 			height = 16,
 		},
 		log_options = {
-      git = {
-        single_file = {
-          diff_merges = "combined",
-        },
-        multi_file = {
-          diff_merges = "first-parent",
-        },
-      },
-      hg = {
-        single_file = {},
-        multi_file = {},
-      },
+			git = {
+				single_file = {
+					diff_merges = "combined",
+				},
+				multi_file = {
+					diff_merges = "first-parent",
+				},
+			},
+			hg = {
+				single_file = {},
+				multi_file = {},
+			},
 		},
 	},
 	key_bindings = {
@@ -117,3 +117,6 @@ require("neogit").setup({
 		diffview = true,
 	},
 })
+
+-- Symbols
+require("gitsigns").setup()

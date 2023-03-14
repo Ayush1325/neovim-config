@@ -5,7 +5,6 @@ local api = vim.api
 
 local lspconfig = require("lspconfig")
 local nlspsettings = require("nlspsettings")
-local lsp_installer = require("nvim-lsp-installer")
 
 -- nlspsettings config
 nlspsettings.setup({
@@ -26,40 +25,15 @@ end
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Setup LSP
-lsp_installer.setup({
-	automatic_installation = false,
-	max_concurrent_installers = 12,
+local default_config = {
+	capabilities = capabilities,
 	on_attach = on_attach,
-})
+}
 
 -- Trouble Diagnostic
 require("trouble").setup()
 
 -- Rust Analyzer
--- lspconfig.rust_analyzer.setup({
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	settings = {
--- 		["rust-analyzer"] = {
--- 			assist = {
--- 				importEnforceGranularity = true,
--- 				importPrefix = "crate",
--- 			},
--- 			cargo = {
--- 				features = "all",
--- 			},
--- 			proc_macro = {
--- 				enable = true,
--- 			},
--- 			checkOnSave = {
--- 				allTargets = true,
--- 			},
--- 			standalone = true,
--- 			inlayHints = { locationLinks = false },
--- 		},
--- 	},
--- })
 require("rust-tools").setup({
 	server = {
 		on_attach = on_attach,
@@ -80,7 +54,6 @@ require("rust-tools").setup({
 				checkOnSave = {
 					allTargets = true,
 				},
-				-- inlayHints = { locationLinks = false },
 			},
 		},
 	},
@@ -88,7 +61,6 @@ require("rust-tools").setup({
 		autoSetHints = true,
 		on_initialized = function(x)
 			if x == "ok" or x == "warning" then
-				-- set inlay hints
 				require("rust-tools.inlay_hints").set_inlay_hints()
 			end
 		end,
@@ -106,54 +78,26 @@ require("rust-tools").setup({
 	-- },
 })
 
--- Topl
-lspconfig.taplo.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
 -- Clangd
-lspconfig.clangd.setup({
+lspconfig.clangd.setup(default_config)
+
+-- Deno
+lspconfig.denols.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 })
 
--- Cmake
--- require("lspconfig").cmake.setup({})
-
--- Lua
-lspconfig.sumneko_lua.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
+require("mason-lspconfig").setup_handlers({
+	-- The first entry (without a key) will be the default handler
+	-- and will be called for each installed server that doesn't have
+	-- a dedicated handler.
+	function(server_name) -- default handler (optional)
+		require("lspconfig")[server_name].setup(default_config)
+	end,
+	-- Next, you can provide a dedicated handler for specific servers.
+	-- For example, a handler override for the `rust_analyzer`:
+	-- ["rust_analyzer"] = function()
+	-- 	require("rust-tools").setup({})
+	-- end,
 })
-
--- Python
-lspconfig.pyright.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
--- Json
-lspconfig.jsonls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
--- Html
-lspconfig.html.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
-lspconfig.emmet_ls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
-lspconfig.cssls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
--- Symbols
-require("gitsigns").setup()

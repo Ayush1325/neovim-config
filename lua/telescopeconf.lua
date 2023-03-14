@@ -24,7 +24,7 @@ require("telescope").load_extension("file_browser")
 require("telescope").load_extension("ui-select")
 
 -- Software License Picker
-require("telescope").load_extension("software-licenses")
+-- require("telescope").load_extension("software-licenses")
 
 -- Telescope Integration
 require("telescope").load_extension("dap")

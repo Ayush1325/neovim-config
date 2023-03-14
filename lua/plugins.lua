@@ -30,9 +30,12 @@ return require("packer").startup({
 		})
 		use("folke/which-key.nvim")
 
+		-- External Deps Mason
+		use("williamboman/mason.nvim")
+		use("williamboman/mason-lspconfig.nvim")
+
 		-- LSP
 		use("neovim/nvim-lspconfig")
-		use("williamboman/nvim-lsp-installer")
 		use("simrat39/rust-tools.nvim")
 		use("nvim-lua/plenary.nvim")
 		use("onsails/lspkind-nvim")
@@ -42,6 +45,7 @@ return require("packer").startup({
 		})
 		use("tamago324/nlsp-settings.nvim")
 		use("simrat39/symbols-outline.nvim")
+		use("jose-elias-alvarez/null-ls.nvim")
 
 		-- Nvim CMP Completion
 		use("hrsh7th/cmp-nvim-lsp")
@@ -105,7 +109,6 @@ return require("packer").startup({
 				require("project_nvim").setup({})
 			end,
 		})
-		use("mhartington/formatter.nvim")
 
 		-- Text Editing
 		use({
