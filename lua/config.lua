@@ -91,3 +91,6 @@ require("auto-save").setup({
 		after_saving = nil, -- ran after doing the actual save
 	},
 })
+
+-- Icons
+require('nvim-web-devicons').setup({})

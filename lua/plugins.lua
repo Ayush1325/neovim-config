@@ -9,7 +9,7 @@ local ensure_packer = function()
 	return false
 end
 
-local packer_bootstrap = ensure_packer()
+local _ = ensure_packer()
 
 return require("packer").startup({
 	function(use)
@@ -46,6 +46,7 @@ return require("packer").startup({
 		use("tamago324/nlsp-settings.nvim")
 		use("simrat39/symbols-outline.nvim")
 		use("jose-elias-alvarez/null-ls.nvim")
+    use("p00f/clangd_extensions.nvim")
 
 		-- Nvim CMP Completion
 		use("hrsh7th/cmp-nvim-lsp")
@@ -89,7 +90,6 @@ return require("packer").startup({
 		-- DAP Mode
 		use("mfussenegger/nvim-dap")
 		use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-		use("mfussenegger/nvim-dap-python")
 		use("theHamsta/nvim-dap-virtual-text")
 
 		-- Git
