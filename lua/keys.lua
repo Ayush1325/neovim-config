@@ -88,6 +88,7 @@ wk.register({
 			d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostic" },
 			q = { "<cmd>Trouble quickfix<cr>", "Quick Fixes" },
 		},
+    f = { vim.lsp.buf.format, "Format Buffer" },
 	},
 
 	m = {

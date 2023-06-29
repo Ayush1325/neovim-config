@@ -46,7 +46,7 @@ return require("packer").startup({
 		use("tamago324/nlsp-settings.nvim")
 		use("simrat39/symbols-outline.nvim")
 		use("jose-elias-alvarez/null-ls.nvim")
-    use("p00f/clangd_extensions.nvim")
+		use("p00f/clangd_extensions.nvim")
 
 		-- Nvim CMP Completion
 		use("hrsh7th/cmp-nvim-lsp")
@@ -107,6 +107,12 @@ return require("packer").startup({
 			"ahmedkhalf/project.nvim",
 			config = function()
 				require("project_nvim").setup({})
+			end,
+		})
+		use({
+			"stevearc/overseer.nvim",
+			config = function()
+				require("overseer").setup()
 			end,
 		})
 

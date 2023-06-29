@@ -97,28 +97,11 @@ require("rust-tools").setup({
 
 -- Clangd Extensions
 require("clangd_extensions").setup({
-  server = {
-    capabilities = capabilities,
-    on_attach = on_attach
-  }
+	server = {
+		capabilities = capabilities,
+		on_attach = on_attach,
+	},
 })
-
--- Clangd
--- lspconfig.clangd.setup(default_config)
-
--- ccls
--- lspconfig.ccls.setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
---   init_options = {
---     index = {
---       threads = 0;
---     };
---     clang = {
---       excludeArgs = { "-frounding-math"} ;
---     };
---   }
--- })
 
 -- Deno
 lspconfig.denols.setup({
@@ -164,7 +147,7 @@ local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
 		filter = function(client)
 			-- apply whatever logic you want (in this example, we'll only use null-ls)
-			return client.name == "null-ls" or client.name == "lua-lsp"
+			return client.name == "null-ls"
 		end,
 		bufnr = bufnr,
 	})
@@ -175,23 +158,29 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.rustfmt,
-    null_ls.builtins.formatting.deno_fmt.with({
-      filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" }
-    }),
-    null_ls.builtins.formatting.clang_format.with({
-      filetypes = { "c", "cpp" }
-    })
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.deno_fmt.with({
+			filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" },
+		}),
+		null_ls.builtins.formatting.clang_format.with({
+			filetypes = { "c", "cpp" },
+		}),
 	},
-	on_attach = function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					lsp_formatting(bufnr)
-				end,
-			})
-		end
-	end,
+	-- on_attach = function(client, bufnr)
+	-- 	if client.supports_method("textDocument/formatting") then
+	-- 		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+	-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+	-- 			group = augroup,
+	-- 			buffer = bufnr,
+	-- 			callback = function()
+	-- 				lsp_formatting(bufnr)
+	-- 			end,
+	-- 		})
+	-- 	end
+	-- end,
 })
+
+--[[
+-- Setup Task Runner (Oveseerer)
+--]]
+require("overseer").setup()
