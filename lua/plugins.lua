@@ -1,153 +1,127 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-local _ = ensure_packer()
-
-return require("packer").startup({
-	function(use)
-		use("wbthomason/packer.nvim")
-
-		-- UI
-		use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
-		use({
-			"hoob3rt/lualine.nvim",
-			requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		})
-		use("RRethy/nvim-base16")
-		use("kyazdani42/nvim-web-devicons")
-		use("lukas-reineke/indent-blankline.nvim")
-		use({
-			"kyazdani42/nvim-tree.lua",
-			requires = "kyazdani42/nvim-web-devicons",
-		})
-		use("folke/which-key.nvim")
-
-		-- External Deps Mason
-		use("williamboman/mason.nvim")
-		use("williamboman/mason-lspconfig.nvim")
-
-		-- LSP
-		use("neovim/nvim-lspconfig")
-		use("simrat39/rust-tools.nvim")
-		use("nvim-lua/plenary.nvim")
-		use("onsails/lspkind-nvim")
-		use({
-			"folke/trouble.nvim",
-			requires = "kyazdani42/nvim-web-devicons",
-		})
-		use("tamago324/nlsp-settings.nvim")
-		use("simrat39/symbols-outline.nvim")
-		use("jose-elias-alvarez/null-ls.nvim")
-		use("p00f/clangd_extensions.nvim")
-
-		-- Nvim CMP Completion
-		use("hrsh7th/cmp-nvim-lsp")
-		use("hrsh7th/cmp-buffer")
-		use("hrsh7th/cmp-path")
-		use("saadparwaiz1/cmp_luasnip")
-		use("hrsh7th/cmp-cmdline")
-		use("hrsh7th/cmp-nvim-lua")
-		use({
-			"hrsh7th/nvim-cmp",
-			requires = { { "hrsh7th/cmp-nvim-lsp" }, { "hrsh7th/cmp-buffer" } },
-		})
-		use("hrsh7th/cmp-nvim-lsp-signature-help")
-
-		-- Treesitter
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-		})
-		use("p00f/nvim-ts-rainbow")
-		use({ "romgrk/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
-
-		-- Telescope
-		use({
-			"nvim-telescope/telescope.nvim",
-			requires = { { "nvim-lua/plenary.nvim" } },
-		})
-		use({ "nvim-telescope/telescope-file-browser.nvim" })
-		use({
-			"nvim-telescope/telescope-fzf-native.nvim",
-			run = "make",
-			requires = { { "nvim-telescope/telescope.nvim" } },
-		})
-		use({ "nvim-telescope/telescope-dap.nvim", requires = "mfussenegger/nvim-dap" })
-		use("nvim-telescope/telescope-ui-select.nvim")
-		use("chip/telescope-software-licenses.nvim")
-
-		-- Snippets
-		use("L3MON4D3/LuaSnip")
-
-		-- DAP Mode
-		use("mfussenegger/nvim-dap")
-		use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-		use("theHamsta/nvim-dap-virtual-text")
-
-		-- Git
-		use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
-		use("sindrets/diffview.nvim")
-		use({
-			"lewis6991/gitsigns.nvim",
-			config = function()
-				require("gitsigns").setup()
-			end,
-		})
-
-		-- Programming
-		use({
-			"ahmedkhalf/project.nvim",
-			config = function()
-				require("project_nvim").setup({})
-			end,
-		})
-		use({
-			"stevearc/overseer.nvim",
-			config = function()
-				require("overseer").setup()
-			end,
-		})
-
-		-- Text Editing
-		use({
-			"windwp/nvim-autopairs",
-			config = function()
-				require("nvim-autopairs").setup()
-			end,
-		})
-		use({
-			"kylechui/nvim-surround",
-			config = function()
-				require("nvim-surround").setup({})
-			end,
-		})
-
-		-- Misc
-		use("Pocco81/auto-save.nvim")
-		use("AckslD/nvim-neoclip.lua")
-		use("jghauser/mkdir.nvim")
-
-		-- Motion
-		use({
-			"phaazon/hop.nvim",
-			config = function()
-				require("hop").setup()
-			end,
-		})
-	end,
-	config = {
-		max_jobs = nil,
-		git = {
-			depth = 1,
-			clone_timeout = 2 * 60,
-		},
+local plugins = {
+	-- UI
+	{ "akinsho/bufferline.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
+	{
+		"hoob3rt/lualine.nvim",
+		dependencies = { "kyazdani42/nvim-web-devicons", opt = true },
 	},
-})
+	"RRethy/nvim-base16",
+	"kyazdani42/nvim-web-devicons",
+	"lukas-reineke/indent-blankline.nvim",
+	{
+		"kyazdani42/nvim-tree.lua",
+		dependencies = "kyazdani42/nvim-web-devicons",
+	},
+	"folke/which-key.nvim",
+
+	-- External Deps Mason
+	"williamboman/mason.nvim",
+	"williamboman/mason-lspconfig.nvim",
+
+	-- LSP
+	"neovim/nvim-lspconfig",
+	"simrat39/rust-tools.nvim",
+	"nvim-lua/plenary.nvim",
+	"onsails/lspkind-nvim",
+	{
+		"folke/trouble.nvim",
+		dependencies = "kyazdani42/nvim-web-devicons",
+	},
+	"tamago324/nlsp-settings.nvim",
+	"simrat39/symbols-outline.nvim",
+	"jose-elias-alvarez/null-ls.nvim",
+	"p00f/clangd_extensions.nvim",
+
+	-- Nvim CMP Completion
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"saadparwaiz1/cmp_luasnip",
+	"hrsh7th/cmp-cmdline",
+	"hrsh7th/cmp-nvim-lua",
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = { { "hrsh7th/cmp-nvim-lsp" }, { "hrsh7th/cmp-buffer" } },
+	},
+	"hrsh7th/cmp-nvim-lsp-signature-help",
+
+	-- Treesitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+	},
+	"p00f/nvim-ts-rainbow",
+	{ "romgrk/nvim-treesitter-context", dependencies = "nvim-treesitter/nvim-treesitter" },
+
+	-- Telescope
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
+	{ "nvim-telescope/telescope-file-browser.nvim" },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+		dependencies = { { "nvim-telescope/telescope.nvim" } },
+	},
+	{ "nvim-telescope/telescope-dap.nvim", dependencies = "mfussenegger/nvim-dap" },
+	"nvim-telescope/telescope-ui-select.nvim",
+	"chip/telescope-software-licenses.nvim",
+
+	-- Snippets
+	"L3MON4D3/LuaSnip",
+
+	-- DAP Mode
+	"mfussenegger/nvim-dap",
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+	"theHamsta/nvim-dap-virtual-text",
+
+	-- Git
+	{ "NeogitOrg/neogit", dependencies = "nvim-lua/plenary.nvim" },
+	"sindrets/diffview.nvim",
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
+
+	-- Programming
+	"stevearc/overseer.nvim",
+
+	-- Text Editing
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
+	},
+
+	-- Misc
+	"Pocco81/auto-save.nvim",
+	"AckslD/nvim-neoclip.lua",
+	"jghauser/mkdir.nvim",
+
+	-- Motion
+	{
+		"phaazon/hop.nvim",
+		config = function()
+			require("hop").setup()
+		end,
+	},
+}
+
+return require("lazy").setup(plugins, {})

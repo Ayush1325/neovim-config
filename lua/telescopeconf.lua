@@ -28,6 +28,3 @@ require("telescope").load_extension("ui-select")
 
 -- Telescope Integration
 require("telescope").load_extension("dap")
-
--- Projects
-require("telescope").load_extension("projects")
