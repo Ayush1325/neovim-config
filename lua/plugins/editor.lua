@@ -42,11 +42,9 @@ return {
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup({
-				show_current_context = true,
-			})
-		end,
+		opts = {
+			show_current_context = true,
+		},
 	},
 	{
 		"Pocco81/auto-save.nvim",
@@ -55,11 +53,9 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
+		opts = {
 				ensure_installed = "all",
-			})
-		end,
+		},
 	},
 	{
 		"nvim-telescope/telescope.nvim",
@@ -113,7 +109,14 @@ return {
 					{ name = "nvim_lsp_signature_help", keyword_length = 3 },
 					{ name = "buffer" },
 					{ name = "async_path", keyword_length = 3 },
-				})
+				}),
+				mapping = cmp.mapping.preset.insert({
+    		  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    		  ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    		  ['<C-Space>'] = cmp.mapping.complete(),
+    		  ['<C-e>'] = cmp.mapping.abort(),
+    		  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    		}),
 			})
 
 			cmp.setup.filetype('lua', {

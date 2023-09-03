@@ -18,7 +18,6 @@ return {
 					name = "Buffers",
 					b = { telescope_builtin.buffers, "List Buffers" },
 					c = { "<cmd>bd<CR>", "Close Buffer" },
-					-- f = { "<cmd>FormatWrite<CR>", "Format Buffer" },
 					n = { "<cmd>echo expand('%:p')<CR>", "Display File Name" },
 					f = { vim.lsp.buf.format, "Format Buffer" },
 				},
