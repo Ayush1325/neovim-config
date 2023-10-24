@@ -4,7 +4,6 @@ return {
 	{
 		"folke/which-key.nvim",
 		dependencies = {
-			"NeogitOrg/neogit",
 			"phaazon/hop.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
@@ -32,12 +31,9 @@ return {
 
 				g = {
 					name = "Git",
-					t = { require("neogit").open, "Open Neogit" },
-					c = {
-						name = "Commits",
-						c = { telescope_builtin.git_commits, "List Git commits" },
-						b = { telescope_builtin.git_bcommits, "List Buffere's commits" },
-					},
+					c = { telescope_builtin.git_commits, "List Git commits" },
+					b = { telescope_builtin.git_bcommits, "List Buffere's commits" },
+					t = { require('neogit').open, "Neogit" }
 				},
 
 				h = {

@@ -42,9 +42,15 @@ return {
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		opts = {
-			show_current_context = true,
+			scope = {
+				enabled = true,
+				show_start = true,
+				show_end = false,
+			}
 		},
+		config = true
 	},
 	{
 		"Pocco81/auto-save.nvim",
@@ -54,7 +60,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		opts = {
-				ensure_installed = "all",
+			ensure_installed = "all",
 		},
 	},
 	{
@@ -65,7 +71,8 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+		build =
+		"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 		config = function()
 			require("telescope").load_extension("fzf")
 		end,
@@ -104,47 +111,57 @@ return {
 					end,
 				},
 				sources = cmp.config.sources({
-					{ name = "luasnip", keyword_length = 2 },
+					{ name = "luasnip",                 keyword_length = 2 },
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lsp_signature_help", keyword_length = 3 },
 					{ name = "buffer" },
-					{ name = "async_path", keyword_length = 3 },
+					{ name = "async_path",              keyword_length = 3 },
 				}),
 				mapping = cmp.mapping.preset.insert({
-    		  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    		  ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    		  ['<C-Space>'] = cmp.mapping.complete(),
-    		  ['<C-e>'] = cmp.mapping.abort(),
-    		  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    		}),
+					['<C-b>'] = cmp.mapping.scroll_docs(-4),
+					['<C-f>'] = cmp.mapping.scroll_docs(4),
+					['<C-Space>'] = cmp.mapping.complete(),
+					['<C-e>'] = cmp.mapping.abort(),
+					['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				}),
 			})
 
 			cmp.setup.filetype('lua', {
 				sources = cmp.config.sources({
-					{ name = "luasnip", keyword_length = 2 },
+					{ name = "luasnip",                 keyword_length = 2 },
 					{ name = "nvim_lua" },
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lsp_signature_help", keyword_length = 3 },
 					{ name = "buffer" },
-					{ name = "async_path", keyword_length = 3 },
+					{ name = "async_path",              keyword_length = 3 },
 				})
 			})
 
- 			cmp.setup.cmdline({ '/', '?' }, {
-    		mapping = cmp.mapping.preset.cmdline(),
-    		sources = {
-      		{ name = 'buffer' }
-    		}
-  		})
+			cmp.setup.cmdline({ '/', '?' }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = 'buffer' }
+				}
+			})
 
 			cmp.setup.cmdline(':', {
-  		  mapping = cmp.mapping.preset.cmdline(),
-  		  sources = cmp.config.sources({
-  		    { name = 'path' }
-  		  }, {
-  		    { name = 'cmdline' }
-  		  })
-  		})
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = 'path' }
+				}, {
+					{ name = 'cmdline' }
+				})
+			})
 		end,
 	},
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",       -- required
+			"nvim-telescope/telescope.nvim", -- optional
+			"sindrets/diffview.nvim",      -- optional
+			"ibhagwan/fzf-lua",            -- optional
+		},
+		config = true
+	}
 }
