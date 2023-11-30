@@ -73,5 +73,27 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+	},
+	{ 
+		"zbirenbaum/copilot.lua",
+		event = "InsertEnter",
+		opts = {
+			suggestion = {
+				auto_trigger = true,
+				keymap = {
+					accept = "<M-CR>",
+				}
+			}
+		},
+		config = true
+	},
+	{
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = true,
 	}
 }
