@@ -21,6 +21,7 @@ return {
 			require("lspconfig").cmake.setup(default_lsp_config())
 			require("lspconfig").sqlls.setup(default_lsp_config())
 			require("lspconfig").pyright.setup(default_lsp_config())
+			require("lspconfig").gopls.setup(default_lsp_config())
 		end
 	},
 	{
@@ -73,8 +74,11 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+		config = function ()
+			require('treesitter-context').setup({})
+		end
 	},
-	{ 
+	{
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
 		opts = {
@@ -88,12 +92,12 @@ return {
 		config = true
 	},
 	{
-    'akinsho/flutter-tools.nvim',
-    lazy = false,
-    dependencies = {
-        'nvim-lua/plenary.nvim',
-        'stevearc/dressing.nvim', -- optional for vim.ui.select
-    },
-    config = true,
-	}
+		'akinsho/flutter-tools.nvim',
+		lazy = false,
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'stevearc/dressing.nvim', -- optional for vim.ui.select
+		},
+		config = true,
+	},
 }
