@@ -35,9 +35,9 @@ return {
 		config = true,
 	},
 	{
-		"folke/tokyonight.nvim",
+		"Mofiqul/dracula.nvim",
 		config = function()
-			cmd("colorscheme tokyonight-night")
+			cmd("colorscheme dracula")
 		end,
 	},
 	{
